@@ -1,0 +1,80 @@
+<?php  
+  	$this->title = 'Create Post';
+  	$post = $params['model'];
+?>
+<!-- ckeditor -->
+<script src="/vendor/ckeditor/ckeditor.js"></script>
+
+<div id="content-wrapper">
+	<div class="container-fluid">
+		<div class="card mb-3">
+          	<div class="card-header">
+            	<i class="fas fa-edit"></i>
+            	Add / Edit Post
+            </div>
+          	<div class="card-body">
+				<form action="" method="post" enctype="multipart/form-data">
+					<!-- if editing post, the id is required to identify that post -->
+					<?php if ($params['isEditingPost'] === true): ?>
+						<input type="hidden" name="id" value="<?php echo $post->id; ?>">
+					<?php endif ?>
+
+					<div class="form-group">
+            			<label for="inputTitle">Title:</label>
+            			<input type="text" class="form-control <?php echo $post->hasError('title') ? 'is-invalid' : '' ?>" id="inputTitle" name="title" value="<?php echo htmlspecialchars($post->title); ?>" placeholder="Enter title" autofocus="autofocus">
+            			<div class="invalid-feedback">
+              				<?php echo $post->getFirstError('title') ?>
+            			</div>
+        			</div>
+					<div class="form-group col-md-5 px-0 mb-5">
+          				<div class="custom-file">
+            				<input type="file" class="custom-file-input <?php echo $post->hasError('image') ? 'is-invalid' : '' ?>" id="inputFeaturedImage" name="featured_image">
+            				<label class="custom-file-label" for="inputFeaturedImage">Featured Image</label>
+            				<div class="invalid-feedback">
+              					<?php echo $post->getFirstError('image') ?>
+            				</div>
+          				</div>
+  					</div>
+					<div class="form-group">
+    					<textarea class="form-control <?php echo $post->hasError('content') ? 'is-invalid' : '' ?>" id="inputContent" name="content" rows="15"><?php echo $post->content; ?></textarea>
+          				<div class="invalid-feedback">
+            				<?php echo $post->getFirstError('content') ?>
+          				</div>
+  					</div>
+				
+					<!-- Only admin users can view publish input field -->
+					<?php if (app\src\Application::$app->user->role === "Admin"): ?>
+						<!-- display checkbox according to whether post has been published or not -->
+						<?php if ($post->published == true): ?>
+							<div class="custom-control custom-checkbox">
+              					<input type="checkbox" class="custom-control-input" value="1" id="inputPublished" name="published" checked="checked">
+  								<label class="custom-control-label" for="inputPublished">Publish</label>
+							</div>
+						<?php else: ?>
+							<div class="custom-control custom-checkbox">
+              					<input type="checkbox" class="custom-control-input" value="1" id="inputPublished" name="published">
+  								<label class="custom-control-label" for="inputPublished">Publish</label>
+							</div>
+						<?php endif ?>
+					<?php endif ?>
+				
+					<!-- if editing post, display the update button instead of create button -->
+					<?php if ($params['isEditingPost'] === true): ?> 
+						<button type="submit" class="btn btn-primary float-right" name="update_post">Update Post</button>
+					<?php else: ?>
+						<button type="submit" class="btn btn-primary float-right" name="create_post">Save Post</button>
+					<?php endif ?>
+				</form>
+			</div>
+          	<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        </div>
+	</div>	<!-- /.container-fluid -->
+</div>	<!-- /.content-wrapper -->
+
+<script>
+	CKEDITOR.replace('content', {
+		height: 300,
+		filebrowserUploadUrl: "post/ck_upload",
+		filebrowserUploadMethod: "form"
+	});
+</script>

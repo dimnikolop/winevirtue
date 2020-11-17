@@ -1,0 +1,90 @@
+<?php  
+    $this->title = 'Manage Wine Reviews';
+    $wines = $params['model']; // Get all wine-reviews from DB
+?>
+<div id="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Manage Wines</li>
+        </ol>
+
+        <!-- Wines DataTables -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-table"></i> Database Wine-Reviews Table
+            </div>
+            <div class="card-body">
+                <!-- Display notification message -->
+                <?php include(ROOT_PATH . 'app/includes/messages.php'); ?>
+    			
+                <!-- Display records from DB-->
+                <div class="table-responsive">
+    				<?php if (empty($wines)): ?>
+    					<h1 class="text-center">No wine reviews in the database.</h1>
+    				<?php else: ?>
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <th>#</th>
+                                <th>Author</th>
+                                <th>Title</th>
+                                <th>Rating</th>
+                                <th>Date</th>
+                                <!-- Only Admin can publish/unpublish a wine review -->
+                                <?php if (app\src\Application::$app->user->role == "Admin"): ?>
+                                    <th><small>Publish</small></th>
+                                <?php endif ?>
+                                <th><small>Edit</small></th>
+                                <th><small>Delete</small></th>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($wines as $key => $wine): ?>
+                                    <tr>
+                                        <td><?php echo $key + 1; ?></td>
+                                        <td><?php echo $wine->author; ?></td>
+                                        <td>
+                                            <a target="_blank" href="<?php echo BASE_URL . 'wine_review/' . $wine->slug ?>">
+                                                <?php echo $wine->title; ?>
+                                            </a>
+                                        </td>
+                                        <td><?php echo $wine->rating; ?></td>
+                                        <td><?php echo $wine->created_at; ?></td>
+							            <!-- Only Admin can publish/unpublish post -->
+							            <?php if (app\src\Application::$app->user->role == "Admin" ): ?>
+								        <td class="text-center">
+								            <?php if ($wine->published == true): ?>
+									            <a class="btn btn-outline-dark border-0 rounded-circle" href="wine/unpublish/<?php echo $wine->id ?>">
+                                                    <i class="fas fa-check"></i>
+									            </a>
+								            <?php else: ?>
+									            <a class="btn btn-outline-dark border-0 rounded-circle" href="wine/publish/<?php echo $wine->id ?>">
+                                                    <i class="fas fa-times"></i>
+									            </a>
+								            <?php endif ?>
+								        </td>
+							            <?php endif ?>
+
+                                        <td class="text-center">
+                                            <a class="btn btn-outline-info btn-sm" href="wine/edit/<?php echo $wine->id ?>">
+                                                <i class="far fa-edit"></i> Edit
+                                            </a>
+                                        </td>
+                                        <td class="text-center">
+                                            <a  class="btn btn-outline-danger btn-sm delete_wine" href="#" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo $wine->id ?>">
+                                                <i class="far fa-trash-alt"></i> Delete
+                                            </a>
+                                        </td>
+						            </tr>
+					            <?php endforeach ?>
+					        </tbody>
+				        </table>
+			        <?php endif ?>
+			    </div>  <!-- // Display records from DB -->
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        </div>			
+	</div>	
+</div>  <!-- /.content-wrapper -->

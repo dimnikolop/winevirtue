@@ -1,0 +1,51 @@
+<?php
+   $this->title = 'Άρθρα';
+   $this->url = BASE_URL . 'articles';
+   $articles = $params['model'];
+   if (!empty($articles)) {
+      $lastPostDate = end($articles)->created_at; // Created date of the last fetched article
+   }
+?>
+  
+<div class="inner-page">
+   <div class="slider-item" style="background-image: url('images/panzano.png');">
+      <div class="container">
+         <div class="row slider-text align-items-center justify-content-center">
+            <div class="col-lg-9 text-center col-sm-12 element-animate">
+               <h1 class="display-4 my-4"><!--Articles--><?php echo $this->title; ?></h1>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div id="postList">
+   <?php if (empty($articles)): ?>
+      <h1 class="text-center my-5">No articles in the database.</h1>
+   <?php else: ?>
+    
+      <?php foreach ($articles as $key => $article): ?>
+         <div class="half d-md-flex d-block">
+            <?php if($key % 2 == 0): ?>
+               <div class="image" style="background-image: url(<?php echo (BASE_URL . 'uploads/images/articles/'. $article->image); ?>)"></div>
+            <?php else: ?>
+               <div class="image order-2" style="background-image: url(<?php echo (BASE_URL . 'uploads/images/articles/'. $article->image); ?>)"></div>
+            <?php endif; ?>
+            <div class="text text-center element-animate">
+               <span class="post-meta"><?php echo date("j F Y", strtotime($article->created_at)); ?></span>
+               <h3 class="mb-4"><?php echo $article->title; ?></h3>
+               <p class="article_summary mb-5"><?php echo preg_replace('/\s+?(\S+)?$/', '', mb_substr(strip_tags($article->content), 0, 200)) . "&#8230;"; ?></p>
+               <p><a href="article/<?php echo $article->slug; ?>" class="btn btn-primary btn-sm px-3 py-2"><!--Continue Reading-->Διαβάστε Περισσότερα</a></p>
+            </div>
+         </div>
+      <?php endforeach; ?>
+  
+      <?php if(count($articles) > 1): ?>
+         <div id="show_more_main" class="col-md-12 py-5 text-center bg-light">
+            <a href="#" id="show_more" class="btn btn-primary" title="Load More Articles..." data-adate="<?php echo $lastPostDate; ?>"><!--Load More...-->Δείτε Περισσότερα...</a>
+            <img src="images/ovals_in_circle.svg" id="loading" style="display: none;" width="32" height="32">
+         </div>
+      <?php endif ?>
+
+   <?php endif ?>
+</div>

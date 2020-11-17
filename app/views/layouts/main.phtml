@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Ιστότοπος μετάδοσης της Αρετής του Κρασιού, με πάθος για γνώση και χιουμοριστική διάθεση για την καλύτερη απόλαυση της αγαπημένης μας συνήθειας!!!">
+    <meta name="author" content="Nikos Fradelos">
+    <meta name="keywords" content="Wine, Oenos, Winelover, WineloverGreece, GreekWine, GreekWines, WineRatings, Winevirtue, Wineblogger, Wineporn, Winestories, Winearticles, Sommelier, SommLife, GreeekSommelier, WineJudge, Winecritic, WineScore, Somm, GreekSomm, Oenophile, foodandwine, grapevine, fermentingwine, wineadvisor, winecollector, wineinvetment, wineportfolio, wineknowledge">
+
+    <meta property="og:url" content="<?php echo $this->url; ?>">
+    <meta property="og:type" content="<?php echo $this->ogType; ?>">
+    <meta property="og:title" content="<?php echo $this->title; ?>">
+    <meta property="og:description" content="<?php echo $this->ogDescription; ?>">
+    <meta property="og:image" content="<?php echo $this->ogImage; ?>">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!--<script async src="https://www.googletagmanager.com/gtag/js?id=UA-173147150-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-173147150-1');
+    </script>-->
+    
+    <link rel="canonical" href="<?php echo $this->url; ?>">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- Google font-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Roboto:300,400,500,700&display=swap&subset=greek-ext">
+
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+
+    <!-- Custom fonts for this template-->
+    <link rel="stylesheet" href="/fonts/fontawesome-free-5.15.1/css/all.min.css">
+
+    <!-- Flag icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/css/flag-icon.min.css" />
+
+    <!-- Theme Style -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Favicon image -->
+    <link rel="icon" type="image/png" href= "/images/favicon.png">
+
+    <title><?php echo $this->title; ?> | Wine Virtue</title>
+</head>
+
+<body>
+    <header>
+      <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand d-xl-none" href="/">Wine Virtue</a>
+          <a class="navbar-brand d-none d-xl-block" href="/"><img src="/images/winevirtue_white_logo.png" alt="WineVirtue Logo" class="img-fluid"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <!-- Links -->
+            <ul class="navbar-nav pl-lg-5 ml-auto">
+              <li class="nav-item">
+                <a class="nav-link <?php echo ($this->title === 'Η Αρετή του Κρασιού') ? 'active' : ''; ?>" href="/"><!--Home-->Αρχική</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link <?php echo ($this->title === 'Σχετικά') ? 'active' : ''; ?>" href="/about"><!--About-->Σχετικά</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link <?php echo ($this->title === 'Άρθρα') ? 'active' : ''; ?>"  href="/articles"><!--Articles-->Άρθρα</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link <?php echo ($this->title === 'Κριτικές Κρασιών') ? 'active' : ''; ?>" href="/wine_reviews"><!--Wine Ratings-->Κριτικές</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link <?php echo ($this->title === 'Επικοινωνία') ? 'active' : ''; ?>" href="/contact"><!--Contact-->Επικοινωνία</a>
+              </li>
+            </ul>
+
+            <div class="navbar-nav ml-auto">
+              <form action="/search" id="searchForm" method="post" class="search-form">
+                <a href="javascript:document.forms['searchForm'].submit();" class="fa fa-search"></a>
+                <input id="searchInput" type="text" class="form-control" placeholder="Αναζήτηση..." name="search">
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    {{content}}
+
+    <a id="back-to-top" href="#" role="button"><img src="/images/back-to-top-icon.png"></a>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row mb-4">
+          <div class="col-md-4 mb-5">
+            <h5><!--About The-->Σχετικά με το Wine Virtue</h5>
+            <p>Ιστότοπος μετάδοσης της Αρετής του Κρασιού, με πάθος για γνώση και χιουμοριστική διάθεση για την καλύτερη απόλαυση της αγαπημένης μας συνήθειας!!!</p>
+          </div>
+          <div class="col-md-4 offset-md-1 mb-5">
+            <h5><!--Contact Info-->Στοιχεία Επικοινωνίας</h5>
+            <p class="mb-4"><span class="d-block">Email:</span><span>nikos_fra@winevirtue.gr</span></p>
+            <div class="d-flex footer-social">
+              <a href="https://www.facebook.com/WineVirtue-105730900813770/" title="Follow me on Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://twitter.com/fra_nikos" title="Follow me on Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+              <a href="https://www.instagram.com/nikos_fra/" title="Follow me on Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+          <div class="col-md-3 mb-2">
+            <h5><!--Quick Links-->Σύνδεσμοι</h5>
+            <ul class="list-unstyled footer-link">
+              <li><a href="/about"><!--About-->Σχετικά</a></li>
+              <li><a href="/articles"><!--Articles-->Άρθρα</a></li>
+              <li><a href="/wine_reviews"><!--Wine Reviews-->Κριτικές</a></li>
+              <li><a href="/contact"><!--Contact-->Επικοινωνία</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row align-items-center py-3" style="border-top: 1px solid rgba(219, 219, 219, 0.2);">
+          <div class="col-md-2 offset-md-1 text-center mb-2 mb-md-0 footer-border-r" style="">
+            <img src="/images/winevirtue_white_logo.png" alt="Image" class="img-fluid" style="height:5rem;">
+          </div>
+          <div class="col-md-8 text-center">
+            <p>
+              Copyright &copy;
+              <script>document.write(new Date().getFullYear());</script> Wine Virtue. All Rights Reserved.<br/> <span>Built with Bootstrap v4.4 | Created by </span><a href="mailto:dnikolopoulos89@gmail.com?subject=WineVirtue_Contact" title="dnikolopoulos89@gmail.com" style="text-decoration: underline;color: inherit;">Νικολόπουλος Δημήτρης</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- loader -->
+    <div id="loader" class="show fullscreen">
+        <svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#f4b214" />
+        </svg>
+    </div>
+
+    <!--- Script Source Files -->
+    <!-- jQuery Core JavaScript -->
+    <script src="/js/jquery/jquery-3.4.1.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap/popper.min.js"></script>
+    <script src="/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/jquery/jquery.waypoints.min.js"></script>
+    <script src="/js/jquery/jquery.fancybox.min.js"></script>
+    <script src="/js/main.js"></script>
+    <!--- End of Script Source Files -->
+
+</body>
+</html>

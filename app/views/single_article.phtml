@@ -1,0 +1,142 @@
+<?php
+	$article = $params['post'];
+	$rposts = $params['rposts'];
+	$this->title = $article->title;
+	$this->url = BASE_URL . 'article/' . $article->slug;
+	$this->ogType = 'article';
+	// Takes the substring of first 200 chars and ends in a whole word(space, tab, new line)
+	$this->ogDescription = preg_replace('/\s+?(\S+)?$/', '', mb_substr(strip_tags($article->content), 0, 200)) . "&#8230;";
+	$this->ogImage = BASE_URL . 'uploads/images/articles/' . $article->image;
+?>
+
+<div class="inner-page">
+  	<div class="slider-item" style="background-image: url(<?php echo BASE_URL . 'images/panzano.png' ?>);">
+	 	<div class="container">
+			<div class="row slider-text align-items-center justify-content-center">
+		  		<div class="col-lg-9 text-center col-sm-12 element-animate">
+			 		<h1 class="display-4 my-4">Nothing endures but change</h1>
+			 		<span><?php echo date("F j, Y", strtotime($article->created_at)) . '&mdash; By ' . htmlspecialchars($article->author); ?></span>
+		  		</div>
+			</div>
+	 	</div>
+  	</div>
+</div>
+
+<div class="wrapper">
+  	<div class="section">
+	 	<div class="container">
+			<div class="row">
+		  		<div class="col-lg-8">
+			 		<figure class="figure">
+						<img src="<?php echo BASE_URL . 'uploads/images/articles/' . $article->image; ?>" alt="Image" class="img-fluid figure-img">
+						<figcaption class="figure-caption text-right px-1"></figcaption>
+			 		</figure>
+
+			 		<h3 class="mb-5"><?php echo htmlspecialchars($article->title); ?></h3>
+
+			 		<div class="d-flex flex-column-reverse flex-md-row justify-content-start justify-content-md-between align-items-md-center mb-2 pb-1 article-info">
+						<div class="h6 m-0">By <?php echo htmlspecialchars($article->author); ?></div>
+						<div class="social_media_share social_media_icon mb-4 mb-md-0">
+				  			<a href="javascript:void(0);" class="fb_share" title="Share on Facebook" aria-label="Share via Facebook" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i>
+				  			</a>
+				  			<a href="javascript:void(0);" class="tw_share" title="Share on Twitter" aria-label="Share via Twitter" rel="noopener noreferrer"><i class="fab fa-twitter"></i>
+				  			</a>
+				  			<a href="javascript:void(0);" class="wa_share" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i>
+				  			</a>
+				  			<a href="#" id="copy_link" data-toggle="tooltip" data-delay='{"show":"0", "hide":"3000"}' title="Copy URL">
+				  				<i class="fas fa-link" style="font-size: 1.2rem;"></i>
+				  			</a>
+						</div>
+			 		</div>
+
+			 		<div class="mb-4 article-date">
+						<?php echo date("F j, Y", strtotime($article->created_at)); ?>
+			 		</div>
+
+			 		<div class="my-5 text-justify">
+						<?php echo $article->content; ?>
+			 		</div>
+
+			 		<div class="mb-5">
+						<h5 class="mb-4 text-center" style="color: #323e55;">Μοιράσου το Άρθρο</h5>
+						<div class="d-flex justify-content-center align-items-center social_media_share horizontal_share_bar">
+				  			<a href="javascript:void(0);" class="facebook_share" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+				  			<a href="javascript:void(0);" class="twitter_share" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
+				  			<a href="javascript:void(0);" class="whatsapp_share" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+				  			<a href="#" id="copy_link2" class="link_share" data-toggle="tooltip" data-delay='{"show":"0", "hide":"3000"}' title="Copy URL"><i class="fas fa-link" style="font-size: 1.2rem;"></i></a>
+						</div>
+			 		</div>
+
+			 		<div id="display_comments" class="pt-5"></div>
+
+			 		<div class="comment-form-wrap pt-5 pr-lg-5 mb-5 mb-md-0">
+						<h3 class="mb-5 font-weight-normal"><!--Leave a comment-->Γράψτε τις εντυπώσεις σας</h3>
+						<div id="returnMsg"></div>
+						<form method="post" id="commentForm" class="comment_form" role="form">
+				  			<div class="form-row">
+					 			<div class="form-group col-md-6">
+									<label for="inputCommentName"><!--Name-->Όνομα *</label>
+									<input type="text" class="form-control form-control-sm txt-input" id="inputCommentName" name="name" placeholder="" required="required">
+									<div class="invalid-feedback"></div>
+					 			</div>
+					 			<div class="form-group col-md-6">
+									<label for="inputCommentEmail">E-mail *</label>
+									<input type="email" class="form-control form-control-sm txt-input" id="inputCommentEmail" name="email" placeholder="" required="required">
+									<div class="invalid-feedback"></div>
+					 			</div>
+						  	</div>
+							<div class="form-row">
+								<div class="col-md-12">
+									<div class="form-group">
+									  	<label for="inputCommentContent"><!--Message-->Μήνυμα *</label>
+									  	<textarea id="inputCommentContent" rows="5" class="form-control form-control-sm txt-input" name="message" placeholder="" required="required"></textarea>
+									  	<div class="invalid-feedback"></div>
+									</div>
+									<div class="form-group">
+									  	<input type="hidden" id="inputParentId" name="parent_id" value="0" />
+									  	<input type="hidden" id="inputPostId" name="post_id" value="<?php echo $article->id; ?>" />
+									  	<button type="submit" class="btn btn-primary" name="comment_submit" value="addComment"><!--Post Comment-->Δημοσίευση</button>
+									</div>
+									<input type="text" class="hidden_email" name="spam_mail">
+								</div>
+							</div>
+						</form>
+               </div>
+		  		</div>
+
+		  		<div class="col-lg-4">
+					<div class="sidebar sticky">
+					 	<h5 class="p-2 mb-4 text-center"><!--Latest Posts-->Πρόσφατα Άρθρα</h5>
+						<div class="mb-5" style="background-color: #f2f2f2;">
+							<?php foreach($rposts as $rpost): ?>
+								<div class="row mx-auto py-3 border-bottom">
+							  		<div class="col-lg-5">
+								 		<a href="/article/<?php echo $rpost->slug; ?>">
+											<img src="<?php echo BASE_URL . "uploads/images/articles/" . $rpost->image; ?>" alt="image" class="img-fluid">
+								 		</a>
+							  		</div>
+							  		<div class="col-lg-7 pl-lg-0">
+								 		<h6 style="font-size: 0.9rem;"><a href="<?php echo BASE_URL . 'article/' . $rpost->slug; ?>"><?php echo $rpost->title; ?></a></h6>
+								 		<div class="small" style="color: #676767;letter-spacing: 1px;">
+                                 			<i class="far fa-clock"></i> <time><?php echo date("F j, Y", strtotime($rpost->created_at)); ?></time>
+								 		</div>
+							  		</div>
+								</div>
+							<?php endforeach; ?>
+						</div>
+				  
+				  		<div class="text-center">
+					 		<h5 class="p-2 mb-4 text-center">Follow Me</h5>
+					 		<div class="d-flex justify-content-center social_media_follow">
+								<a href="https://www.facebook.com/WineVirtue-105730900813770/" class="facebook-icon" title="Follow me on Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+								<a href="https://twitter.com/fra_nikos" class="twitter-icon" title="Follow me on Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+								<a href="https://www.instagram.com/nikos_fra/" class="instagram-icon" title="Follow me on Instagram" target="_blank"><i class="fab fa-instagram" style="font-size: 3rem; line-height: 70px;"></i></a>
+					 		</div>
+				  		</div>
+			 		</div>
+		  		</div>
+
+			</div>
+	 	</div>  <!-- end container -->
+  	</div>  <!-- end section -->
+</div>  <!-- end wrapper -->

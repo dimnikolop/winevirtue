@@ -1,0 +1,115 @@
+<?php
+   $this->title = 'Κριτικές Κρασιών';
+   $this->url = BASE_URL . 'wine_reviews';
+   $wines = $params['model'];
+   $pageLinks = $params['pageLinks'];
+?>
+
+<div class="inner-page">
+   <div class="slider-item" style="background-image: url('images/panzano.png');">
+      <div class="container">
+         <div class="row slider-text align-items-center justify-content-center">
+            <div class="col-lg-9 text-center col-sm-12 element-animate">
+               <h1 class="display-4"><!--Wine Reviews--><?php echo $this->title; ?></h1>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="wrapper">
+   <div class="section">
+      <div class="container-fluid">
+         
+         <form action="" method="post" id="filterForm" class="filter-form mb-5" accept-charset="utf-8">
+            <div class="d-flex flex-wrap align-items-end ml-md-3">
+               <div class="form-group col-sm-6  col-xl-2">
+                  <label for="inputSearch"><!--Search-->Αναζήτηση</label>
+                  <input type="text" class="form-control txt-input" id="inputSearch" name="search" value="" placeholder="Ετικέτα, Παραγωγός, Χρονιά">
+               </div>
+               <div class="form-group col-sm-6 col-xl-2">
+                  <label for="inputVariety"><!--Variety-->Ποικιλία/ες</label>
+                  <input type="text" class="form-control txt-input" id="inputVariety" name="variety" value="" placeholder="Αναζήτηση">
+               </div>
+               <div class="form-group col-6 col-md-4 col-xl-1">
+                  <label for="inputColor"><!--Color / Type-->Χρώμα / Τύπος</label>
+                  <select id="inputColor" class="custom-select" name="color">
+                  <option value="" selected>~ Any ~</option>
+                  <option value="Λευκό"><!--White-->Λευκό</option>
+                  <option value="Κόκκινο"><!--Red-->Κόκκινο</option>
+                  <option value="Ροζέ"><!--Rose-->Ροζέ</option>
+                  <option value="Γλυκό"><!--Sweet-->Γλυκό</option>
+                  <option value="Αφρώδες"><!--Sparkling-->Αφρώδες</option>
+                  </select>
+               </div>
+               <div class="form-group col-6 col-md-4 col-xl-1">
+                  <label for="inputSweetness"><!--Sweetness-->Γλυκύτητα</label>
+                  <select id="inputSweetness" class="custom-select" name="sweetness">
+                  <option value="" selected>~ Any ~</option>
+                  <option value="Πολύ ξηρό">Πολύ ξηρό</option>
+                  <option value="Ξηρό">Ξηρό</option>
+                  <option value="Ημίξηρο">Ημίξηρο</option>
+                  <option value="Ημίγλυκο">Ημίγλυκο</option>
+                  <option value="Γλυκό">Γλυκό</option>
+                  <option value="Πολύ Γλυκό">Πολύ Γλυκό</option>
+                  </select>
+               </div>
+               <div class="form-group col-6 col-md-4 col-xl-1">
+                  <label for="inputRating"><!--Rating-->Βαθμολογία</label>
+                  <select id="inputRating" class="custom-select" name="rating">
+                  <option value="" selected>~ Any ~</option>
+                  <option value="0-79+">0 - 79</option>
+                  <option value="80-84+">80 - 84</option>
+                  <option value="85-89+">85 - 89</option>
+                  <option value="90-94+">90 - 94</option>
+                  <option value="95-97+">95 - 97</option>
+                  <option value="98-99+">98 - 99</option>
+                  </select>
+               </div>
+               <div class="form-group col-auto">
+                  <button type="submit" class="btn btn-outline-primary" name="filter_submit"><!--Filter-->Φίλτρο</button>
+                  <button id="resetButton" type="button" class="btn btn-outline-primary ml-3">Reset</button>
+               </div>
+            </div>
+         </form>
+
+         <div id="display_wines">
+            <div class="row mx-0">
+               <?php if (!empty($wines)): ?>
+                  <?php foreach ($wines as $key => $wine): ?>
+                     <?php
+                        $pos = strpos($wine->rating, '+');
+                        if($wine->rating >= 95) {
+                           $bg_color = 'rgba(255, 223, 50, 0.6);';
+                        }
+                        elseif ($wine->rating >= 90) {
+                           $bg_color = 'rgba(218, 218, 218, 0.6);';
+                        }
+                        elseif ($wine->rating >= 85) {
+                           $bg_color = 'rgba(205, 127, 50, 0.6);';
+                        }
+                        else {
+                           $bg_color = 'rgba(40, 40, 40, 0.6);';
+                        }
+                     ?>
+                     <div class="col-sm-6 col-md-4 col-lg-3 my-3">
+                        <a href="wine_review/<?php echo $wine->slug; ?>" class="link-thumbnail">
+                           <h3><?php echo $wine->title; ?></h3>
+                           <span class="rating" style="background-color:<?php echo $bg_color; ?>"><?php echo ($pos !== false) ? substr($wine->rating, 0, -1) . '<sup>+</sup>' : $wine->rating; ?></span>
+                           <img src="<?php echo (BASE_URL . 'uploads/images/wines/' . $wine->imageh); ?>" alt="Image" class="img-fluid">
+                        </a>
+                     </div>
+                  <?php endforeach ?>
+               <?php else: ?>
+                  <h1 class="mx-auto">No wine reviews in the database.</h1>
+               <?php endif ?>
+            </div>
+         </div>
+
+         <div id="pagination">
+            <?php echo $pageLinks; ?>
+         </div>
+
+      </div>
+   </div> <!-- /.container-fluid -->
+</div> <!-- /.wrapper -->

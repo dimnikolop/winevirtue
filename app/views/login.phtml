@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <!-- meta tags -->
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <title>Admin - Login</title>
+
+   <!-- Custom styles for this template-->
+   <link rel="stylesheet" href="/css/style-admin.css">
+
+   <!-- Favicon image -->
+   <link rel="icon" type="image/png" href= "/images/favicon.png">
+</head>
+
+<body class="bg-dark">
+   <div class="container">
+      <div class="card card-login mx-auto mt-5">
+         <div class="card-header">Login</div>
+            <div class="card-body">
+               <form action="" method="post">
+                  <div class="form-group">
+                     <div class="form-label-group">
+                        <input type="text" id="inputEmail" class="form-control <?php echo ($params["model"]->hasError('email')) ? 'is-invalid' : '' ?>" name="email" value="<?php echo $params["model"]->email; ?>" placeholder="Email" autofocus="autofocus">
+                        <label for="inputEmail">Email</label>
+                        <div class="invalid-feedback">
+                           <?php echo $params["model"]->getFirstError('email'); ?>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="form-group">
+                     <div class="form-label-group">
+                        <input type="password" id="inputPassword" class="form-control <?php echo ($params["model"]->hasError('password')) ? 'is-invalid' : '' ?>" name="password" value="<?php echo $params["model"]->password; ?>" placeholder="Password">
+                        <label for="inputPassword">Password</label>
+                        <div class="invalid-feedback">
+                           <?php echo $params["model"]->getFirstError('password'); ?>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="form-group">
+                     <div class="checkbox">
+                        <label>
+                           <input type="checkbox" value="remember-me"> Remember Password
+                        </label>
+                     </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block" name="login_submit">Login</button>
+               </form>
+               
+               <div class="text-center">
+                  <a class="d-block small mt-3" href="#register.html">Register an Account</a>
+                  <a class="d-block small" href="#forgot-password.html">Forgot Password?</a>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- Bootstrap core JavaScript-->
+   <script src="/js/jquery/jquery-3.4.1.min.js"></script>
+   <script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
+   
+   <!-- Core plugin JavaScript-->
+   <script src="/js/jquery/jquery.easing.min.js"></script>
+
+</body>
+</html>

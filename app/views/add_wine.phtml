@@ -1,0 +1,196 @@
+<?php
+    $this->title = 'Add Wine';
+    $wine = $params['model'];
+?>
+
+<div id="content-wrapper">
+  <div class="container-fluid">
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-edit"></i> Add / Edit Wine
+        </div>
+        <div class="card-body">
+        <form action="" method="post" enctype="multipart/form-data">
+			<!-- if editing wine, the id is required to identify that wine -->
+			<?php if ($params['isEditingWine'] === true): ?>
+				<input type="hidden" name="id" value="<?php echo $wine->id; ?>">
+			<?php endif ?>
+
+            <div class="form-group">
+                <label for="inputTitle">Τίτλος :</label>
+                <input type="text" class="form-control" id="inputTitle" name="title" value="<?php echo htmlspecialchars($wine->title); ?>" placeholder="Enter title" autofocus="autofocus">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input <?php echo $wine->hasError('imageh') ? 'is-invalid' : '' ?>" id="featuredImageH" name="featured_imageH">
+                        <label class="custom-file-label" for="featuredImageH">Featured Image (Condensed)</label>
+                        <div class="invalid-feedback">
+                            <?php echo $wine->getFirstError('imageh') ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input <?php echo $wine->hasError('imagev') ? 'is-invalid' : '' ?>" id="featuredImageV" name="featured_imageV">
+                        <label class="custom-file-label" for="featuredImageV">Featured Image (Vertical)</label>
+                        <div class="invalid-feedback">
+                            <?php echo $wine->getFirstError('imagev') ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputDescription">Περιγραφή :</label>
+                <textarea class="form-control <?php echo $wine->hasError('description') ? 'is-invalid' : '' ?>" id="inputDescription" name="description" rows="6" required="required"><?php echo $wine->description; ?></textarea>
+                <div class="invalid-feedback">
+                    <?php echo $wine->getFirstError('description') ?>
+                </div>
+            </div>
+
+            <fieldset>
+                <legend class="align-content-center">Χαρακτηριστικά Κρασιού</legend>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="selectColor">Χρώμα :</label>
+                        <select class="form-control" id="selectColor" name="color" required="required">
+                            <option value="" selected disabled>Διάλεξε μία από τις παρακάτω επιλογές</option>
+                            <option value="Λευκό" <?php if(isset($wine->color) && $wine->color == 'Λευκό'): ?> selected="true" <?php endif ?>>Λευκό</option>
+                            <option value="Κόκκινο" <?php if(isset($wine->color) && $wine->color == 'Κόκκινο'): ?> selected="true" <?php endif ?>>Κόκκινο</option>
+                            <option value="Ροζέ" <?php if(isset($wine->color) && $wine->color == 'Ροζέ'): ?> selected="true" <?php endif ?>>Ροζέ</option>
+                            <option value="Λευκό Γλυκό" <?php if(isset($wine->color) && $wine->color == 'Λευκό Γλυκό'): ?> selected="true" <?php endif ?>>Λευκό Γλυκό</option>
+                            <option value="Κόκκινο Γλυκό" <?php if(isset($wine->color) && $wine->color == 'Κόκκινο Γλυκό'): ?> selected="true" <?php endif ?>>Κόκκινο Γλυκό</option>
+                            <option value="Ροζέ Γλυκό" <?php if(isset($wine->color) && $wine->color == 'Ροζέ Γλυκό'): ?> selected="true" <?php endif ?>>Ροζέ Γλυκό</option>
+                            <option value="Λευκό Αφρώδες" <?php if(isset($wine->color) && $wine->color == 'Λευκό Αφρώδες'): ?> selected="true" <?php endif ?>>Λευκό Αφρώδες</option>
+                            <option value="Κόκκινο Αφρώδες" <?php if(isset($wine->color) && $wine->color == 'Κόκκινο Αφρώδες'): ?> selected="true" <?php endif ?>>Κόκκινο Αφρώδες</option>
+                            <option value="Ροζέ Αφρώδες" <?php if(isset($wine->color) && $wine->color == 'Ροζέ Αφρώδες'): ?> selected="true" <?php endif ?>>Ροζέ Αφρώδες</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="selectSweetness">Γλυκύτητα :</label>
+                        <select class="form-control" id="selectSweetness" name="sweetness" required="required">
+                            <option value="" selected disabled>Διάλεξε μία από τις παρακάτω επιλογές</option>
+                            <option value="Πολύ ξηρό" <?php if(isset($wine->sweetness) && $wine->sweetness == 'Πολύ ξηρό'): ?> selected="true" <?php endif ?>>Πολύ ξηρό</option>
+                            <option value="Ξηρό" <?php if(isset($wine->sweetness) && $wine->sweetness == 'Ξηρό'): ?> selected="true" <?php endif ?>>Ξηρό</option>
+                            <option value="Ημίξηρο" <?php if(isset($wine->sweetness) && $wine->sweetness == 'Ημίξηρο'): ?> selected="true" <?php endif ?>>Ημίξηρο</option>
+                            <option value="Ημίγλυκο" <?php if(isset($wine->sweetness) && $wine->sweetness == 'Ημίγλυκο'): ?> selected="true" <?php endif ?>>Ημίγλυκο</option>
+                            <option value="Γλυκό" <?php if(isset($wine->sweetness) && $wine->sweetness == 'Γλυκό'): ?> selected="true" <?php endif ?>>Γλυκό</option>
+                            <option value="Πολύ γλυκό" <?php if(isset($wine->sweetness) && $wine->sweetness == 'Πολύ γλυκό'): ?> selected="true" <?php endif ?>>Πολύ γλυκό</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputRating">Rating :</label>
+                        <input type="text" class="form-control <?php echo $wine->hasError('rating') ? 'is-invalid' : '' ?>" id="inputRating" name="rating" value="<?php echo $wine->rating; ?>" required="required">
+                        <div class="invalid-feedback">
+                            <?php echo $wine->getFirstError('rating') ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="inputProducer">Παραγωγός :</label>
+                        <input type="text" class="form-control" id="inputProducer" name="producer" value="<?php echo $wine->producer; ?>" placeholder="" required="required">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="selectCountry">Χώρα :</label>
+                        <select class="form-control" id="selectCountry" name="country" required="required">
+                            <option value="" selected disabled>Διάλεξε μία από τις παρακάτω επιλογές</option>
+                            <option value="ar" <?php if(isset($wine->country) && $wine->country == 'ar'): ?> selected="true" <?php endif ?>>Αργεντινή</option>
+                            <option value="au" <?php if(isset($wine->country) && $wine->country == 'au'): ?> selected="true" <?php endif ?>>Αυστραλία</option>
+                            <option value="at" <?php if(isset($wine->country) && $wine->country == 'at'): ?> selected="true" <?php endif ?>>Αυστρία</option>
+                            <option value="fr" <?php if(isset($wine->country) && $wine->country == 'fr'): ?> selected="true" <?php endif ?>>Γαλλία</option>
+                            <option value="de" <?php if(isset($wine->country) && $wine->country == 'de'): ?> selected="true" <?php endif ?>>Γερμανία</option>
+                            <option value="ch" <?php if(isset($wine->country) && $wine->country == 'ch'): ?> selected="true" <?php endif ?>>Ελβετία</option>
+                            <option value="gr" <?php if(isset($wine->country) && $wine->country == 'gr'): ?> selected="true" <?php endif ?>>Ελλάδα</option>
+                            <option value="gb" <?php if(isset($wine->country) && $wine->country == 'gb'): ?> selected="true" <?php endif ?>>Ηνωμένο Βασίλειο</option>
+                            <option value="us" <?php if(isset($wine->country) && $wine->country == 'us'): ?> selected="true" <?php endif ?>>Η.Π.Α.</option>
+                            <option value="es" <?php if(isset($wine->country) && $wine->country == 'es'): ?> selected="true" <?php endif ?>>Ισπανία</option>
+                            <option value="il" <?php if(isset($wine->country) && $wine->country == 'il'): ?> selected="true" <?php endif ?>>Ισραήλ</option>
+                            <option value="it" <?php if(isset($wine->country) && $wine->country == 'it'): ?> selected="true" <?php endif ?>>Ιταλία</option>
+                            <option value="ca" <?php if(isset($wine->country) && $wine->country == 'ca'): ?> selected="true" <?php endif ?>>Καναδάς</option>
+                            <option value="cy" <?php if(isset($wine->country) && $wine->country == 'cy'): ?> selected="true" <?php endif ?>>Κύπρος</option>
+                            <option value="lb" <?php if(isset($wine->country) && $wine->country == 'lb'): ?> selected="true" <?php endif ?>>Λίβανος</option>
+                            <option value="nz" <?php if(isset($wine->country) && $wine->country == 'nz'): ?> selected="true" <?php endif ?>>Νεα Ζηλανδία</option>
+                            <option value="za" <?php if(isset($wine->country) && $wine->country == 'za'): ?> selected="true" <?php endif ?>>Νότιος Αφρική</option>
+                            <option value="hu" <?php if(isset($wine->country) && $wine->country == 'hu'): ?> selected="true" <?php endif ?>>Ουγγαρία</option>
+                            <option value="uy" <?php if(isset($wine->country) && $wine->country == 'uy'): ?> selected="true" <?php endif ?>>Ουρουγουάη</option>
+                            <option value="pt" <?php if(isset($wine->country) && $wine->country == 'pt'): ?> selected="true" <?php endif ?>>Πορτογαλία</option>
+                            <option value="ro" <?php if(isset($wine->country) && $wine->country == 'ro'): ?> selected="true" <?php endif ?>>Ρουμανία</option>
+                            <option value="tr" <?php if(isset($wine->country) && $wine->country == 'tr'): ?> selected="true" <?php endif ?>>Τουρκία</option>
+                            <option value="cl" <?php if(isset($wine->country) && $wine->country == 'cl'): ?> selected="true" <?php endif ?>>Χιλή</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="inputRegion">Περιοχή :</label>
+                        <input type="text" class="form-control" id="inputRegion" name="region" value="<?php echo $wine->region; ?>" placeholder="" required="required">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="inputVarieties">Ποικιλία/ες :</label>
+                        <input type="text" class="form-control" id="inputVarieties" name="varieties" value="<?php echo $wine->varieties; ?>" placeholder="" required="required">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="inputVintage">Χρονιά :</label>
+                        <input type="text" class="form-control <?php echo $wine->hasError('vintage') ? 'is-invalid' : '' ?>" id="inputVintage" name="vintage" value="<?php echo $wine->vintage; ?>" required="required">
+                        <div class="invalid-feedback">
+                            <?php echo $wine->getFirstError('vintage') ?>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="inputAlcohol">Αλκοόλ :</label>
+                        <input type="number" step="0.1" class="form-control" id="inputAlcohol" name="alcohol" value="<?php echo $wine->alcohol; ?>" required="required">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputConsumption">Παράθυρο κατανάλωσης :</label>
+                        <input type="text" class="form-control" id="inputConsumption" name="consumption" value="<?php echo $wine->consumption; ?>" placeholder="" required="required">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputFoodPairing">Food Pairing :</label>
+                        <input type="text" class="form-control" id="inputFoodPairing" name="food_pairing" value="<?php echo $wine->food_pairing; ?>" placeholder="" required="required">
+                    </div>
+                </div>
+            </fieldset>
+				
+			<!-- Only admin users can view publish input field -->
+			<?php if (app\src\Application::$app->user->role === "Admin"): ?>
+				<!-- display checkbox according to whether wine has been published or not -->
+				<?php if ($wine->published == true): ?>
+					<div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" value="1" id="inputPublished" name="published" checked="checked">
+                        <label class="custom-control-label" for="inputPublished">Publish</label>
+                    </div>
+				<?php else: ?>
+					<div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" value="1" id="inputPublished" name="published">
+                        <label class="custom-control-label" for="inputPublished">Publish</label>
+                    </div>
+				<?php endif ?>
+			<?php endif ?>
+				
+			<!-- if editing wine, display the update button instead of create button -->
+			<?php if ($params['isEditingWine'] === true): ?> 
+				<button type="submit" class="btn btn-primary float-right" name="update_wine">Update</button>
+			<?php else: ?>
+				<button type="submit" class="btn btn-primary float-right" name="create_wine">Save</button>
+			<?php endif ?>
+		</form>
+
+		</div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+    </div>	
+	</div> <!-- /.container-fluid -->
+</div> <!-- /.content-wrapper -->

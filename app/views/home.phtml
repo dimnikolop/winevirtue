@@ -1,0 +1,122 @@
+<?php
+  $this->title = 'Η Αρετή του Κρασιού';
+  $this->url = BASE_URL;
+  $articles = $params['articles'];
+?>
+
+<!-- Image Slider -->
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="5000" data-pause="true" style="box-shadow: 0 5px 10px #444;">
+   <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    	<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    	<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    	<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+  	</ol>
+  	<div class="carousel-inner">
+    	<div class="carousel-item slider-item active" style="background-image: url('images/panzano.png');">
+    		<div class="carousel-caption" style="margin-bottom: 3rem;">
+          	<h1 class="display-4">Nothing endures but change</h1>
+        	</div>
+    	</div>
+    	<div class="carousel-item slider-item" style="background-image: url('images/reading.jpg');">
+    		<div class="carousel-caption">
+          	<h1 class="display-4">Ανακαλύψτε την αρετή του κρασιού</h1>
+          	<h2 class="font-weight-light">Διαβάζοντας</h2>
+        	</div>
+    	</div>
+    	<div class="carousel-item slider-item" style="background-image: url('images/vineyard.jpg');">
+    		<div class="carousel-caption">
+          	<h1 class="display-4">Ανακαλύψτε την αρετή του κρασιού</h1>
+          	<h2 class="font-weight-light">Δοκιμάζοντας</h2>
+        	</div>
+    	</div>
+    	<div class="carousel-item slider-item" style="background-image: url('images/antinori.png');">
+    		<div class="carousel-caption">
+          	<h1 class="display-4">Ανακαλύψτε την αρετή του κρασιού</h1>
+          	<h2 class="font-weight-light">Ταξιδεύοντας</h2>
+        	</div>
+    	</div>
+  	</div>
+</div>   <!-- End Image Slider -->
+
+<div class="wrapper">
+   <div class="section">
+      <div class="container">
+      	<div class="d-flex flex-column justify-content-center">
+      		<div class="block-19 text-center">
+      			<h2>Ηράκλειτος 535-475 πΧ: Τα Πάντα Ρει</h2>
+      			<h4 class="mb-5">Καλως ορίσατε στον εδώ και 2500 χρόνια ολοένα και μεταβαλλόμενο κόσμο του κρασιού</h4>
+      		</div>
+      	</div>
+
+         <div class="d-flex flex-column flex-md-row justify-content-center align-items-center">
+            <div class="wine-color-block mx-md-2">
+               <a class="" href="wine_reviews?color=Αφρώδες">
+                  <h6><!--Sparkling Wines-->Αφρωδη</h6>
+                  <img src="images/spw-icon.png" class="img-fluid">
+               </a>
+            </div>
+            <div class="divider d-none d-md-block"></div>
+            <div class="wine-color-block mx-md-2">
+               <a class="" href="wine_reviews?color=Λευκό">
+                  <h6><!--White Wines-->Λευκα</h6>
+                  <img src="images/ww-icon.png" class="img-fluid">
+               </a>
+            </div>
+            <div class="divider d-none d-md-block"></div>
+            <div class="wine-color-block mx-md-2">
+               <a class="" href="wine_reviews?color=Ροζέ">
+                  <h6><!--Rose Wines-->Ροζε</h6>
+                  <img src="images/rsw-icon.png" class="img-fluid">
+               </a>
+            </div>
+            <div class="divider d-none d-md-block"></div>
+            <div class="wine-color-block mx-md-2">
+               <a class="" href="wine_reviews?color=Κόκκινο">
+                  <h6><!--Red Wines-->Κοκκινα</h6>
+                  <img src="images/rw-icon.png" class="img-fluid">
+               </a>
+            </div>
+            <div class="divider d-none d-md-block"></div>
+            <div class="wine-color-block mx-md-2">
+               <a class="" href="wine_reviews?color=Γλυκό">
+                  <h6><!--Sweet Wines-->Γλυκα</h6>
+                  <img src="images/sw-icon.png" class="img-fluid">
+               </a>
+            </div>
+         </div>
+
+      </div> <!-- End container -->
+   </div>  <!-- End section -->
+
+   <div class="section border-t">
+      <div class="container">
+        <div class="row justify-content-center mb-5 element-animate">
+            <div class="col-md-8 text-center">
+               <h2 class=" heading"><!--Wine Articles-->Πρόσφατα Άρθρα</h2>
+            </div>
+      	</div>
+      </div>
+      <div class="container">
+      	<?php if (empty($articles)): ?>
+            <h1 class="text-center my-5">No articles in the database.</h1>
+         <?php else: ?>
+            <div class="row">
+               <?php foreach ($articles as $article): ?>
+                  <div class="col-md-6 col-lg-6 element-animate my-3">
+                     <a href="article/<?php echo $article->slug; ?>" class="link-thumbnail">
+                        <h3><?php echo htmlspecialchars($article->title); ?></h3>
+                        <span class="icon">
+                           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 226 226" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                              <path d="M0,226v-226h226v226z" fill="none"></path><g fill="#ffffff"><path d="M112.7793,22.39401c-8.31529,0.12186 -14.95971,6.95725 -14.84596,15.27266v60.26667h-60.26667c-5.43358,-0.07684 -10.48763,2.77792 -13.22684,7.47115c-2.73922,4.69323 -2.73922,10.4978 0,15.19103c2.73922,4.69323 7.79326,7.548 13.22684,7.47115h60.26667v60.26667c-0.07684,5.43358 2.77792,10.48763 7.47115,13.22684c4.69323,2.73922 10.4978,2.73922 15.19103,0c4.69323,-2.73922 7.548,-7.79326 7.47115,-13.22684v-60.26667h60.26667c5.43358,0.07684 10.48763,-2.77792 13.22684,-7.47115c2.73922,-4.69323 2.73922,-10.4978 0,-15.19103c-2.73922,-4.69323 -7.79326,-7.548 -13.22684,-7.47115h-60.26667v-60.26667c0.05567,-4.06993 -1.53756,-7.98927 -4.41709,-10.86603c-2.87953,-2.87676 -6.80041,-4.46621 -10.87028,-4.40662z"></path></g></g>
+                           </svg>
+                        </span>
+                        <img src="<?php echo BASE_URL . 'uploads/images/articles/' . $article->image; ?>" alt="Image" class="img-fluid" width="600" height="400">
+                     </a>
+                  </div>
+               <?php endforeach ?>
+         <?php endif ?>
+            </div>
+      </div> 
+   </div> <!-- END section -->
+</div> <!-- END wrapper -->

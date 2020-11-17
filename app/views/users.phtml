@@ -1,0 +1,136 @@
+<?php
+    $this->title = 'Manage Users';
+    $user = $params['model'];
+    $admins = $params['users']; // Get all users (Admins,Authors) from DB
+    if (!is_array($admins)) {
+        $admins = array($admins);
+    }
+?>
+<div id="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Manage Users</li>
+        </ol>
+
+        <!-- User Register ~ Users List -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-table"></i> Create / Edit User - Users table
+            </div>
+            <div class="card-body">
+                <!-- Middle form - to create and edit  -->
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        <h1 class="display-4 mb-3">Create/Edit User</h1>
+
+                        <form action="" method="post" class="mx-auto w-75">
+                            <!-- if editing user, the id is required to identify that user -->
+                            <?php if ($params['isEditingUser'] === true): ?>
+                                <input type="hidden" name="id" value="<?php echo $user->id; ?>">
+                            <?php endif ?>
+                            <div class="form-group">
+                                <label for="inputFUllname" class="sr-only">Fullname</label>
+                                <input type="text" class="form-control <?php echo $user->hasError('fullname') ? 'is-invalid' : '' ?>" id="inputFullname" name="fullname" value="<?php echo htmlspecialchars($user->fullname); ?>" placeholder="Fullname..." required="required" autofocus="autofocus">
+                                <div class="invalid-feedback">
+                                    <?php echo $user->getFirstError('fullname') ?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail" class="sr-only">E-mail</label>
+                                <input type="text" class="form-control <?php echo $user->hasError('email') ? 'is-invalid' : '' ?>" id="inputEmail" name="email" value="<?php echo htmlspecialchars($user->email); ?>" placeholder="E-mail..." required="required">
+                                <div class="invalid-feedback">
+                                    <?php echo $user->getFirstError('email') ?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword" class="sr-only">Password</label>
+                                <input type="password" class="form-control <?php echo $user->hasError('password') ? 'is-invalid' : '' ?>" id="inputPassword" name="password" value="<?php echo $user->password; ?>" placeholder="Password..." required="required">
+                                <div class="invalid-feedback">
+                                    <?php echo $user->getFirstError('password') ?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPasswordConfirmation" class="sr-only">Password Confirmation</label>
+                                <input type="password" class="form-control <?php echo $user->hasError('confirmPassword') ? 'is-invalid' : '' ?>" id="inputPasswordConfirmation" name="confirmPassword" value="<?php echo $user->confirmPassword; ?>" placeholder="Password confirmation..." required="required">
+                                <div class="invalid-feedback">
+                                    <?php echo $user->getFirstError('confirmPassword') ?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="selectRole" class="sr-only">Assign role</label>
+                                <select class="form-control <?php echo $user->hasError('role') ? 'is-invalid' : '' ?>" id="selectRole" name="role" required="required">
+                                    <option value="" selected disabled>Assign role</option>
+                                    <option value="Admin" <?php echo ($user->role === 'Admin') ? "selected='true'" : '' ?>>Admin</option>
+                                    <option value="Author" <?php echo ($user->role === 'Author') ? "selected='true'" : '' ?>>Author</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    <?php echo $user->getFirstError('role') ?>
+                                </div>
+                            </div>
+
+                            <!-- if editing user, display the update button instead of create button -->
+                            <?php if ($params['isEditingUser'] === true): ?> 
+                                <button type="submit" class="btn btn-primary" name="update">Update User</button>
+                            <?php else: ?>
+                                <button type="submit" class="btn btn-primary" name="create">Save User</button>
+                            <?php endif ?>
+                        </form>
+                    </div>  <!-- // Middle form - to create and edit -->
+
+                    <div class="col-md-6">
+                        <!-- Display notification message -->
+                        <?php include(ROOT_PATH . 'app/includes/messages.php') ?>
+                        
+                        <!-- Display records from DB-->
+                        <div class="table-responsive">
+                            <?php if (empty($admins)): ?>
+                                <h1>No admins in the database.</h1>
+                            <?php else: ?>
+                                <table class="table table-bordered text-center">
+                                    <caption>List of users</caption>
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>Role</th>
+                                            <th colspan="2">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($admins as $key => $admin): ?>
+                                            <tr>
+                                                <td><?php echo $key + 1; ?></td>
+                                                <td>
+                                                    <?php echo $admin->fullname; ?>, &nbsp;
+                                                    <?php echo $admin->email; ?>
+                                                </td>
+                                                <td><?php echo $admin->role; ?></td>
+
+                                                <!-- Only Admin can edit and delete users -->
+                                                <td>
+                                                    <a href="users/edit/<?php echo $admin->id ?>" class="btn btn-outline-info btn-sm">
+                                                        <i class="far fa-edit"></i> Edit
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="#" class="btn btn-outline-danger btn-sm delete_user" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo $admin->id ?>">
+                                                        <i class="far fa-trash-alt"></i> Delete
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach ?>
+                                    </tbody>
+                                </table>
+                            <?php endif ?>
+                        </div>  <!-- // Display records from DB -->
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        </div>
+    </div>
+</div>  <!-- /.content-wrapper -->

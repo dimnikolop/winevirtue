@@ -1,0 +1,85 @@
+<?php
+  $this->title = 'Επικοινωνία';
+  $this->url = BASE_URL . 'contact';
+?>
+
+<div class="inner-page">
+   <div class="slider-item" style="background-image: url('images/panzano.png');">
+      <div class="container">
+         <div class="row slider-text align-items-center justify-content-center">
+            <div class="col-lg-9 text-center col-sm-12 element-animate">
+               <h1 class="display-4 my-4"><!--Contact Us--><?php echo $this->title; ?></h1>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+  
+<div class="wrapper">
+   <div class="section">
+      <div class="container">
+         <div class="row">
+            <div class="col-md-6 mb-5 order-2">
+               <h2 class="mb-4 font-weight-light">Φόρμα Επικοινωνίας</h2>
+               <!-- Display notification message -->
+               <?php include ROOT_PATH . 'app/includes/messages.php'; ?>
+               <span id="info_msg"></span>
+               <form method="post" id="contactForm" class="contact_form" role="form">
+                  <div class="form-row">
+                     <div class="col-md-6 form-group">
+                        <label for="inputName"><!--Name-->Όνομα *</label>
+                        <input type="text" class="form-control" id="inputName" name="name">
+                        <div class="invalid-feedback"></div>
+                     </div>
+                     <div class="col-md-6 form-group">
+                        <label for="inputSurname"><!--Surname-->Επίθετο *</label>
+                        <input type="text" class="form-control" id="inputSurname" name="surname">
+                        <div class="invalid-feedback"></div>
+                     </div>
+                  </div>
+                  <div class="form-row">
+                     <div class="col-md-6 form-group">
+                        <label for="inputComapny"><!--Company-->Επωνυμία</label>
+                        <input type="text" class="form-control" id="inputCompany" name="company">
+                     </div>
+                     <div class="col-md-6 form-group">
+                        <label for="inputEmail">Email *</label>
+                        <input type="email" class="form-control" id="inputEmail" name="email">
+                        <div class="invalid-feedback"></div>
+                     </div>
+                  </div>
+                  <div class="form-row">
+                     <div class="col-md-12 form-group">
+                        <label for="inputMessage"><!--Write Message-->Μήνυμα *</label>
+                        <textarea class="form-control" rows="5" id="inputMessage" name="message"></textarea>
+                        <div class="invalid-feedback"></div>
+                     </div>
+                  </div>
+                  <div class="form-row">
+                     <div class="col-md-6 form-group">
+                        <button type="submit" class="btn btn-primary" name="send_contact_msg"><!--Send Message-->Αποστολή <i class="fa fa-chevron-right ml-2"></i></button>
+                     </div>
+                  </div>
+                  <input type="text" class="hidden_email" name="bot_mail">
+               </form>
+            </div>
+            <div class="col-md-6 order-2 mb-5">
+               <div class="row">
+                  <div class="col-md-8 mx-auto contact-info">
+                     <h2 class="mb-5 font-weight-light">Στοιχεία Επικοινωνίας</h2>
+                     <p class="d-flex">
+                        <span class="icon mr-5"><i class="fa fa-envelope"></i></span>
+                        <span>nikos_fra@winevirtue.gr</span>
+                     </p>
+                     <div class="d-flex social_media_follow">
+                        <a href="https://www.facebook.com/WineVirtue-105730900813770/" class="facebook-icon ml-0" title="Follow me on Facebook"  target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com/fra_nikos" class="twitter-icon" title="Follow me on Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/nikos_fra/" class="instagram-icon" title="Follow me on Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>   <!-- end container -->
+   </div>    <!-- end section -->
+</div>   <!-- end wrapper -->

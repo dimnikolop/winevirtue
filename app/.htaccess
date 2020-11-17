@@ -1,0 +1,7 @@
+# Block access to multiple file types
+# SetEnvIfNoCase X-Requested-With XMLHttpRequest ajax
+# <FilesMatch "\.php$">
+Order Deny,Allow
+Deny from all
+# </FilesMatch>
+# Allow from env=ajax
