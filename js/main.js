@@ -2,6 +2,8 @@ jQuery(function($){
 
 	'use strict';
 
+   /* * * * * * * * * * * * * GENERAL * * * * * * * * * * * * * */
+
    // Scroll to top button appear
    $(window).scroll(function() {
       var y = $(this).scrollTop();
@@ -49,7 +51,7 @@ jQuery(function($){
       pause: "false"
    });
 
-   /* * * * * * * * * * * * * GENERAL * * * * * * * * * * * * * */
+   /* * * * * * * * * * * * * CONTACT * * * * * * * * * * * * * */
 
    // AJAX submit contact form
    $("#contactForm").on('submit', function(event) {
@@ -195,8 +197,6 @@ jQuery(function($){
       });
    }
 
-   /* * * * * * * * * * * * * END ARTICLES * * * * * * * * * * * * * */
-
    /* * * * * * * * * * * * * SHARE ICONS * * * * * * * * * * * * * */
 
    // copy to Clipboard function for copy link icon in article, wine review pages
@@ -250,9 +250,7 @@ jQuery(function($){
       })
    }
 
-   /* * * * * * * * * * * * * END SHARE ICONS * * * * * * * * * * * * * */
-
-  /* * * * * * * * * * * * * WINE REVIEWS * * * * * * * * * * * * * */
+   /* * * * * * * * * * * * * WINE REVIEWS * * * * * * * * * * * * * */
 
    //window.onpopstate = function(event) {
       
@@ -381,6 +379,9 @@ jQuery(function($){
          {
             buildContent(data.wines, data.pagination);
             history.pushState(/*{page: page}*/ null, null, urlQuery);   // Update the address bar with the 'url' parameter
+            $("html, body").animate({
+               scrollTop: $("#display_wines").offset().top - 200
+            }, 800);
          },
          error: function() { // Debugging error
             console.log('Houston, we have a problem!');
@@ -401,6 +402,9 @@ jQuery(function($){
          {
             buildContent(data.wines, data.pagination, data.total_records);
             history.pushState(/*{filter_params: filter_params, page: page}*/ null, null, urlQuery);  // Push new url to URL bar and history of the browser
+            $("html, body").animate({
+               scrollTop: $("#display_wines").offset().top - 200
+            }, 800);
          },
          error: function() {
             console.log('Houston, we have a problem!');
