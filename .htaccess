@@ -1,0 +1,26 @@
+# Disable directory browsing
+Options -Indexes
+
+Options -Multiviews
+
+# MAINTENANCE-PAGE REDIRECT
+# <IfModule mod_rewrite.c>
+  # RewriteEngine on
+  # local ip
+  # RewriteCond %{REMOTE_ADDR} !^555\.555\.555\.555$
+  # server ip
+  # RewriteCond %{REMOTE_ADDR} !^127\.0\.0\.1$
+  # maintenance page and assets
+  # RewriteCond %{REQUEST_URI} !/maintenance.html$ [NC]
+  # RewriteCond %{REQUEST_URI} !(css|images).+$ [NC]
+  # RewriteCond %{REQUEST_URI} !\.(jpe?g?|png|css) [NC]
+  # serve 302 response - temporarily moved
+  # RewriteRule (.*) /maintenance.html [R=302,L]
+# </IfModule>
+
+# Turn Rewrite Engine On
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^(.+)$ index.php/$1 [QSA,L]
