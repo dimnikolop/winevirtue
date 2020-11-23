@@ -131,9 +131,9 @@ abstract class DbModel extends Model
 			$stmt->bindValue($key+1, $value);
 		}
 		
-        $stmt->execute();
-        $recordCount = $stmt->rowCount();
-        return $recordCount;
+		$stmt->execute();
+		$recordCount = $stmt->rowCount();
+		return $recordCount;
     }
 
 	public static function prepare($sql)
@@ -148,7 +148,7 @@ abstract class DbModel extends Model
 	    for ($i = 0; $i < count($paramArray); $i ++) {
 	        $paramValueReference[] = & $paramArray[$i];
 	    }
-	   call_user_func_array(array($stmt, 'bind_param'), $paramValueReference);
+	   	call_user_func_array(array($stmt, 'bind_param'), $paramValueReference);
 	}
 }
 
